@@ -7,9 +7,9 @@ class Office {
     addressLine1 = faker.address.streetAddress();
     addressLine2 = faker.address.secondaryAddress();
     state = faker.address.state();
-    postalCode = faker.address.zipCode();
     country = faker.address.country();
-    territory =  faker.address.country();
+    postalCode = faker.address.zipCode('#####');
+    territory = faker.helpers.arrayElement(['CEEMEA', 'EEMEA', 'SEMEA', 'MENA', 'AMER', 'NALA', 'NORAM', 'LATAM', 'APAC']);
 }
 
 module.exports = Office;

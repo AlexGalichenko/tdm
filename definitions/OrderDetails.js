@@ -8,9 +8,9 @@ class OrderDetails {
         if (!products) products = data.products.map(e => e.productCode);
         return faker.helpers.arrayElement(products);
     };
-    quantityOrdered = faker.datatype.number(10);
+    quantityOrdered = faker.datatype.number({min: 1, max: 10});
     priceEach = faker.datatype.float({ max: 1000 });
-    orderLineNumber = ({index}) => index + 1;
+    orderLineNumber = faker.datatype.number(50);
 }
 
 module.exports = OrderDetails;

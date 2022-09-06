@@ -18,7 +18,7 @@ for (const tableDefinition of tableDefinitions) {
     console.log(`generation: ${table}`);
     if (data[table] === undefined) data[table] = [];
     if (ctx[ctxTable] === undefined) ctx[ctxTable] = [];
-    let index = 0;
+    let ctxIndex = { index: 0 };
     if (basedOn) {
         for (const baseRecord of ctx[basedOn]) {
             processRecord({
@@ -27,25 +27,25 @@ for (const tableDefinition of tableDefinitions) {
                 ctx,
                 ctxTable,
                 numberOfRecords: numberOfRecordsPerBaseRecord,
-                index,
+                ctxIndex,
                 recordSchema,
                 baseRecord
             });
         }
     } else {
-        processRecord({data, table, ctx, ctxTable, numberOfRecords, index, recordSchema});
+        processRecord({data, table, ctx, ctxTable, numberOfRecords, ctxIndex, recordSchema});
     }
 }
 
-function processRecord({data, table, ctx, ctxTable, numberOfRecords, index, recordSchema, baseRecord}) {
+function processRecord({data, table, ctx, ctxTable, numberOfRecords, ctxIndex, recordSchema, baseRecord}) {
     for (let i = 0; i < numberOfRecords; i++) {
         const record = new recordSchema();
         for (const column in record) {
             if (typeof record[column] === 'function') {
-                record[column] = record[column]({data, ctx, index, record, baseRecord});
+                record[column] = record[column]({data, ctx, index: ctxIndex.index, record, baseRecord});
             }
         }
-        index++;
+        ctxIndex.index++;
         data[table].push(record);
         ctx[ctxTable].push(record);
     }

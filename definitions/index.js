@@ -18,24 +18,24 @@ module.exports = [
     {
         table: 'employees',
         basedOn: 'offices',
-        numberOfRecordsPerBaseRecord: 1,
+        numberOfRecordsPerBaseRecord: 100,
         recordSchema: Employee
     },
     {
         table: 'productLines',
         recordSchema: ProductLine,
-        numberOfRecords: 5
+        numberOfRecords: 50
     },
     {
         table: 'products',
         basedOn: 'productLines',
         recordSchema: Product,
-        numberOfRecordsPerBaseRecord: 5
+        numberOfRecordsPerBaseRecord: 500
     },
     {
         table: 'customers',
         recordSchema: Customer,
-        numberOfRecords: 10
+        numberOfRecords: 10000
     },
     {
         table: 'orders',
@@ -44,7 +44,7 @@ module.exports = [
         numberOfRecordsPerBaseRecord: 10
     },
     {
-        table: 'ordersdetails',
+        table: 'orderdetails',
         basedOn: 'orders',
         recordSchema: OrderDetails,
         numberOfRecordsPerBaseRecord: 1
@@ -66,6 +66,6 @@ module.exports = [
         ctxTable: 'employeesWithoutManager',
         basedOn: 'offices',
         recordSchema: EmployeeWithoutManager,
-        numberOfRecordsPerBaseRecord: 1
+        numberOfRecordsPerBaseRecord: 10
     },
 ]
